@@ -1,0 +1,72 @@
+.detail{
+    flex: 1;
+}
+.Detail-user{
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid #dddddd35;
+}
+.Detail-user img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.Detail-info{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.Detail-info .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Detail-info .title img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgba(17, 25, 40, 0.3);
+    border-radius: 50%;
+}
+.Detail-info-Photos{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.PhotoDetail{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.PhotoDetail img {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(17, 25, 40, 0.3);
+    border-radius: 30%;
+    padding: 5px;
+    cursor: pointer;
+}
+.PhotoDetail .photoItem{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    span{
+        font-size: 14px;
+        color: lightgray;
+        font-weight: 300;
+    }
+}
+.PhotoDetail .photoItem img{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+    padding: 0px;
+}
