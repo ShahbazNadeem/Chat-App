@@ -1,32 +1,59 @@
-.detail{
+.detail {
     flex: 1;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 25, 40, 0.5) transparent;
 }
-.Detail-user{
-    padding: 20px 30px;
+
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+.detail::-webkit-scrollbar {
+    width: 10px;
+}
+
+.detail::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detail::-webkit-scrollbar-thumb {
+    background: rgba(17, 25, 40, 0.5);
+    border-radius: 5px;
+}
+
+.detail::-webkit-scrollbar-thumb:hover {
+    background: rgba(17, 25, 40, 0.7);
+}
+
+.Detail-user {
+    padding: 10px 30px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     border-bottom: 1px solid #dddddd35;
 }
-.Detail-user img{
-    width: 100px;
-    height: 100px;
+
+.Detail-user img {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
 }
-.Detail-info{
-    padding: 20px;
+
+.Detail-info {
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
+    /* overflow: scroll; */
 }
-.Detail-info .title{
+
+.Detail-info .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.Detail-info .title img{
+
+.Detail-info .title img {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -34,16 +61,19 @@
     background-color: rgba(17, 25, 40, 0.3);
     border-radius: 50%;
 }
-.Detail-info-Photos{
+
+.Detail-info-Photos {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
-.PhotoDetail{
+
+.PhotoDetail {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
+
 .PhotoDetail img {
     width: 30px;
     height: 30px;
@@ -52,21 +82,52 @@
     padding: 5px;
     cursor: pointer;
 }
-.PhotoDetail .photoItem{
+
+.PhotoDetail .photoItem {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     cursor: pointer;
-    span{
+
+    span {
         font-size: 14px;
         color: lightgray;
         font-weight: 300;
     }
 }
-.PhotoDetail .photoItem img{
+
+.PhotoDetail .photoItem img {
     width: 40px;
     height: 40px;
     border-radius: 5px;
     object-fit: cover;
     padding: 0px;
+}
+
+.Detail-info-deletee-btn {
+    padding: 10px;
+    background-color: rgba(230, 74, 105, 0.553);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+
+    &:hover {
+        background-color: rgba(220, 20, 60, 0.796);
+    }
+}
+
+.Detail-info-logout-btn {
+    padding: 10px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+
+    &:hover {
+        background-color: #1a40e8;
+    }
 }

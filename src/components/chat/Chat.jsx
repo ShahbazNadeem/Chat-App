@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import "./chat.css"
 import EmojiPicker from 'emoji-picker-react'
 
 const Chat = () => {
   const [open, setOpen] = useState(false)
   const [text, setText] = useState("")
+  const endRef = useRef(null)
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [])
   const handleEmoji = (e) => {
     setText(() => text + e.emoji)
     setOpen(false)
@@ -36,7 +41,7 @@ const Chat = () => {
         </div>
         <div className="Chat-center-message own">
           <div className="Chat-center-text">
-          <img src="https://i.pinimg.com/474x/7d/1c/09/7d1c0982b0123dd7df65c67c9da4e774.jpg" alt="" />
+            <img src="https://i.pinimg.com/474x/7d/1c/09/7d1c0982b0123dd7df65c67c9da4e774.jpg" alt="" />
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
             <span>1 min ago</span>
           </div>
@@ -80,6 +85,9 @@ const Chat = () => {
             <span>1 min ago</span>
           </div>
         </div>
+
+        <div className="" ref={endRef}></div>
+
       </div>
 
       <div className="Chat-bottom">
@@ -90,7 +98,7 @@ const Chat = () => {
         </div>
         <input type="text" placeholder='Type a message...' value={text} onChange={(e) => setText(e.target.value)} />
         <div className="Chat-bottom-emoji">
-          <img src={open ? "./emoji-close.png":"./emoji.png"} alt="emoji" onClick={() => setOpen(!open)} />
+          <img src={open ? "./emoji-close.png" : "./emoji.png"} alt="emoji" onClick={() => setOpen(!open)} />
           <div className="emoji-picker-container">
             <EmojiPicker open={open} onEmojiClick={handleEmoji} />
           </div>

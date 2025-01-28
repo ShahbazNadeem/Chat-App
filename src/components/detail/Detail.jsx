@@ -45,27 +45,7 @@ const Detail = () => {
             </div>
             <img src="./download.png" alt="" />
           </div>
-          <div className="PhotoDetail">
-            <div className="photoItem">
-              <img src="https://i.pinimg.com/474x/7d/1c/09/7d1c0982b0123dd7df65c67c9da4e774.jpg" alt="" />
-              <span>photo_hjdg_121</span>
-            </div>
-            <img src="./download.png" alt="" />
-          </div>
-          <div className="PhotoDetail">
-            <div className="photoItem">
-              <img src="https://i.pinimg.com/474x/7d/1c/09/7d1c0982b0123dd7df65c67c9da4e774.jpg" alt="" />
-              <span>photo_hjdg_121</span>
-            </div>
-            <img src="./download.png" alt="" />
-          </div>
-          <div className="PhotoDetail">
-            <div className="photoItem">
-              <img src="https://i.pinimg.com/474x/7d/1c/09/7d1c0982b0123dd7df65c67c9da4e774.jpg" alt="" />
-              <span>photo_hjdg_121</span>
-            </div>
-            <img src="./download.png" alt="" />
-          </div>
+          
         </div>
 
         <div className="Detail-info-option">
@@ -75,7 +55,8 @@ const Detail = () => {
           </div>
         </div>
 
-        <button>Block This User</button>
+        <button className='Detail-info-deletee-btn'>Block This User</button>
+        <button className='Detail-info-logout-btn'>LogOut</button>
 
       </div>
     </div>
