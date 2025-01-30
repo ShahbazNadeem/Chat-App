@@ -7,15 +7,13 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, setDoc } from 'firebase/firestore';
+import { uploadToCloudinary } from '../../lib/Upload';
 
 const Login = () => {
-  
-  const [avatar, setAvatar] = useState({
-    file: null,
-    url: "",
-  });
 
-  const handleAvatar = (e) => {
+  const [avatar, setAvatar] = useState({ url: '', file: null });
+
+  const handleAvatar = async (e) => {
     if (e.target.files[0]) {
       setAvatar({
         file: e.target.files[0],
@@ -25,32 +23,39 @@ const Login = () => {
   };
 
   const handleRigester = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData(e.target);
     const { username, email, password } = Object.fromEntries(formData);
+  
     try {
-
-      const res = await createUserWithEmailAndPassword(auth, email, password)
-
+      let imgUrl = "";
+  
+      if (avatar.file) {
+        imgUrl = await uploadToCloudinary(avatar.file); // Pass avatar.file instead of avatar
+      }
+  
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+  
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
         id: res.user.uid,
-        // avatar: imgUrl,
+        avatar: imgUrl || "", // Ensure avatar is never undefined
         blocked: [],
         password,
       });
-
+  
       await setDoc(doc(db, "userchats", res.user.uid), {
         chats: [],
       });
-
+  
       toast.success("Account created! You can login now!");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
     }
-  }
+  };
+  
 
   const handleLogin = (e) => {
     e.preventDefault()
