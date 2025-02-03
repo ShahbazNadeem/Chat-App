@@ -2,8 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "LucidaSans", "LucidaSansRegular", "LucidaGrande",
+    "LucidaSansUnicode", Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -20,19 +20,168 @@ body {
 }
 
 .container {
-  width: 90vw;
+  width: 99vw;
   height: 99vh;
   background-color: rgba(17, 25, 40, 0.75);
-  backdrop-filter: blur(19px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  backdrop-filter: blur(19px)saturate(180%);
+  border: 1pxsolidrgba(255, 255, 255, 0.125);
   border-radius: 15px;
   display: flex;
 }
 
 
-.loading{
+.loading {
   padding: 50px;
   font-size: 36px;
   border-radius: 10px;
   background-color: rgba(17, 25, 40, 0.9);
 }
+
+
+h1 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 78px;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 50px;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+
+/*
+@media(max-width:1200px){
+.container{
+max-width:1000px;
+}
+
+h1{
+font-size:55px;
+font-weight:500;
+line-height:68px;
+}
+
+h2{
+font-size:41px;
+line-height:42px;
+}
+
+h3{
+font-size:18px;
+line-height:28px;
+}
+
+h4{
+font-size:18px;
+line-height:24px;
+}
+
+p{
+line-height:22px;
+}
+
+}
+
+@media(max-width:992px){
+.container{
+max-width:920px;
+}
+
+h1{
+font-size:45px;
+line-height:58px;
+}
+
+h2{
+font-size:34px;
+line-height:38px;
+}
+
+h3{
+font-size:15px;
+line-height:23px;
+}
+
+h4{
+font-size:15px;
+line-height:21px;
+}
+
+p{
+font-size:13px;
+line-height:18px;
+}
+
+}
+
+@media(max-width:768px){
+h1{
+font-size:36px;
+line-height:48px;
+}
+
+h2{
+font-size:30px;
+}
+
+h3{
+font-size:13px;
+line-height:23px;
+}
+
+h4{
+line-height:16px;
+}
+}
+
+@media(max-width:576px){
+.container{
+max-width:100%;
+}
+
+h1{
+font-size:26px;
+line-height:49px;
+}
+
+h2{
+font-size:20px;
+line-height:22px;
+}
+
+}*/
