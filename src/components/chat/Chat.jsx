@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react'
 import "./chat.css"
 import EmojiPicker from 'emoji-picker-react'
-import { doc, onSnapshot } from 'firebase/firestore'
+import { arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '../../lib/firebase'
 import { useChatStore } from '../../lib/chatStore'
+import { useUserStore } from '../../lib/userStore'
 
 const Chat = () => {
   const [open, setOpen] = useState(false)
   const [chat, setChat] = useState();
   const [text, setText] = useState("")
   const endRef = useRef(null)
+  const { currentUser } = useUserStore();
   const { chatId } = useChatStore();
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const Chat = () => {
       setChat(res.data());
     });
 
-    return()=>{
+    return () => {
       unSub()
     }
   }, [chatId])
@@ -29,7 +31,24 @@ const Chat = () => {
     setText(() => text + e.emoji)
     setOpen(false)
   }
-  console.log("chat",chat)
+
+  const handleSend = async () => {
+    if (text === "") return;
+
+    try {
+      await updateDoc(doc(db, "chats", chatId), {
+        messages: arrayUnion({
+          senderId: currentUser.id,
+          text,
+          createdAt: new Date(),
+        })
+      })
+    } catch (error) {
+      console.log(error)
+
+    }
+
+  }
   return (
     <div className='Chat'>
       <div className="Chat-top">
@@ -48,59 +67,16 @@ const Chat = () => {
       </div>
 
       <div className="Chat-center">
-        <div className="Chat-center-message">
-          <img src="./avatar.png" alt="" />
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
+        {chat?.messages?.map((message) => {
+          <div className="Chat-center-message own" key={message?.createdAt}>
+            <div className="Chat-center-text">
+              {message.img && <img src={message.img} alt="img" />}
+              <p>{message.text}</p>
+              {/* <span>1 min ago</span> */}
+            </div>
           </div>
-        </div>
-        <div className="Chat-center-message own">
-          <div className="Chat-center-text">
-            <img src="https://i.pinimg.com/474x/7d/1c/09/7d1c0982b0123dd7df65c67c9da4e774.jpg" alt="" />
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="Chat-center-message">
-          <img src="./avatar.png" alt="" />
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="Chat-center-message own">
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="Chat-center-message">
-          <img src="./avatar.png" alt="" />
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="Chat-center-message own">
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="Chat-center-message">
-          <img src="./avatar.png" alt="" />
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="Chat-center-message own">
-          <div className="Chat-center-text">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi. Fuga quos incidunt quisquam eos doloremque ad consectetur laudantium aspernatur ullam saepe sunt doloribus ipsam, accusantium laborum aliquam impedit asperiores.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
+        })
+        }
 
         <div className="" ref={endRef}></div>
 
@@ -119,7 +95,7 @@ const Chat = () => {
             <EmojiPicker open={open} onEmojiClick={handleEmoji} />
           </div>
         </div>
-        <button className='Chat-bottom-sendButton'>Send</button>
+        <button className='Chat-bottom-sendButton' onClick={handleSend}>Send</button>
       </div>
     </div>
   )
