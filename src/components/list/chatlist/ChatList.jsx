@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./chatList.css";
+import "./chatlist.css";
 import AddUser from "./addUser/addUser";
 import { useUserStore } from "../../../lib/userStore";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
@@ -92,7 +92,8 @@ const ChatList = () => {
           key={chat.chatId}
           onClick={() => handleSelect(chat)}
           style={{
-            backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
+            backgroundColor: chat?.isSeen ? "transparent" : "transparent",
+            // backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
           }}
         >
           <img
